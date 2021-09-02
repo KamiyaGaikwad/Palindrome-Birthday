@@ -21,4 +21,34 @@ else{
 }
 }
 
-isPalindrome('racecar');
+var date  = { 
+    day : 14, 
+    month : 9, 
+    year : 2020 }
+
+function dateFromNumberToString(date){
+    var dateInStr = {day:"", month:"", year:""}
+
+    if(date.day< 10) {
+        dateInStr.day = '0' + date.day;
+    }
+    else{
+        dateInStr.day = date.day.toString();
+    }
+    if(date.month< 10) {
+        dateInStr.month = '0' + date.month;
+    }
+    else{
+        dateInStr.month = date.month.toString();
+    }
+    if(date.year< 10) {
+        dateInStr.year = '0' + date.year;
+    }
+    else{
+        dateInStr.year = date.year.toString();
+    }
+    
+    console.log(dateInStr);
+}
+
+dateFromNumberToString(date);
