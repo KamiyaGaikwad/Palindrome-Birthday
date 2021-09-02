@@ -60,7 +60,22 @@ function datesInAllFormats(){
     var dateMMDDYY = dateInString.month + dateInString.day + dateInString.year.slice(-2);
     var dateYYMMDD = dateInString.year.slice(-2) + dateInString.month + dateInString.day;
 
-    console.log([dateDDMMYYYY, dateMMDDYYYY, dateYYYYMMDD, dateDDMMYY, dateMMDDYY, dateYYMMDD]);
+    return [dateDDMMYYYY, dateMMDDYYYY, dateYYYYMMDD, dateDDMMYY, dateMMDDYY, dateYYMMDD];
 }
 
-datesInAllFormats();
+function checkPalindromeForAllDateFormats(){
+    var dateFormatList = datesInAllFormats(date);
+    var checker = [];
+    
+    for(var i=0;i<dateFormatList.length;i++){
+        if(isPalindrome(dateFormatList[i])){
+            checker.push(true);
+        }
+        else{
+            checker.push(false);
+        }
+    }
+    console.log(checker);
+}
+
+checkPalindromeForAllDateFormats();
