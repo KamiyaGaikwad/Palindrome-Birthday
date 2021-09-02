@@ -14,15 +14,15 @@ function isPalindrome(checkString){
 var reversedString = reverseString(checkString);
 
 if(reversedString == checkString){
-    console.log(true);
+    return true;
 }
 else{
-    console.log(false);
+    return false;
 }
 }
 
 var date  = { 
-    day : 14, 
+    day : 10, 
     month : 9, 
     year : 2020 }
 
@@ -48,7 +48,19 @@ function dateFromNumberToString(date){
         dateInStr.year = date.year.toString();
     }
     
-    console.log(dateInStr);
+    return dateInStr;
 }
 
-dateFromNumberToString(date);
+function datesInAllFormats(){
+    var dateInString = dateFromNumberToString(date);
+    var dateDDMMYYYY = dateInString.day + dateInString.month + dateInString.year;
+    var dateMMDDYYYY = dateInString.month + dateInString.day + dateInString.year;
+    var dateYYYYMMDD = dateInString.year + dateInString.month + dateInString.day;
+    var dateDDMMYY = dateInString.day + dateInString.month + dateInString.year.slice(-2);
+    var dateMMDDYY = dateInString.month + dateInString.day + dateInString.year.slice(-2);
+    var dateYYMMDD = dateInString.year.slice(-2) + dateInString.month + dateInString.day;
+
+    console.log([dateDDMMYYYY, dateMMDDYYYY, dateYYYYMMDD, dateDDMMYY, dateMMDDYY, dateYYMMDD]);
+}
+
+datesInAllFormats();
