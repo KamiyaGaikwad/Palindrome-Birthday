@@ -1,5 +1,5 @@
-function reverseString(){
-var str = 'hello';
+function reverseString(checkString){
+var str = checkString;
 
 var charList = str.split('');
 
@@ -7,7 +7,18 @@ var reversedList = charList.reverse();
 
 var reversedStr = reversedList.join('');
 
-console.log(reversedStr);
+return reversedStr;
 }
 
-reverseString();
+function isPalindrome(checkString){
+var reversedString = reverseString(checkString);
+
+if(reversedString == checkString){
+    console.log(true);
+}
+else{
+    console.log(false);
+}
+}
+
+isPalindrome('racecar');
