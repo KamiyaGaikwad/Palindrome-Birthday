@@ -1,21 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2&display=swap');
 body {
     margin: 0;
     padding: 1rem;
     box-sizing: border-box;
     height: 100vh;
     background-color: rgb(29, 35, 51);
-    color: white;
+    color: #6EE7B7;
+    font-family: 'Exo 2', sans-serif;
   }
   
   main {
-    border: 1px solid white;
+    margin-top: 6rem;
+    /* border: 1px solid #6EE7B7; */
     text-align: center;
     height: 100%;
+   
   }
   
   p {
+    margin-top: 4rem;
     padding: 2rem;
     text-align: left;
-    font-size: large;
+    font-size: x-large;
+    text-align: center;
   }
   
+  button {
+    cursor: pointer;
+    padding: 0.4rem;
+    margin-left: 0.3rem;
+    border-radius: 0.3rem;
+    border: 3px solid #6EE7B7;
+  }
+
+  nav {
+    width: 84.5em; /* width of container */
+    height: 6rem; /* height of container */
+    overflow: hidden;
+    background-repeat: repeat-y;
+    /* border: 5px solid black; */
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+
+input {
+  border : 2px solid #6EE7B7;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+  width:8rem;
+}
+
+#loading-bar{
+  display : none;
+  justify-content: center;
+  align-items: center;
+
+}

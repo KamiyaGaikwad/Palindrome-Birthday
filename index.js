@@ -1,6 +1,7 @@
 var bdayInput = document.querySelector("#bday-input");
 var showBtn = document.querySelector("#show-btn");
 var resultDiv = document.querySelector("#result");
+var loadingBar = document.querySelector("#loading-bar");
 
 function reverseString(checkString){
 var str = checkString;
@@ -131,7 +132,7 @@ function getNextDate(date){
 
     function getNextDateAsPalindrome(date){
         var nextDate = getNextDate(date);
-        counterOfDays = 0;
+        var counterOfDays = 0;
 
         while(1){
             counterOfDays++;
@@ -146,12 +147,12 @@ function getNextDate(date){
             nextDate = getNextDate(nextDate);
         }
     }
-    
+  
+  
 
+showBtn.addEventListener("click",loadingHider);
 
-showBtn.addEventListener("click",showResult);
-
-function showResult() {
+function showResult(){
     var inputByButton = bdayInput.value;
     if(inputByButton !== ''){
         var date = inputByButton.split("-");
@@ -163,13 +164,12 @@ function showResult() {
             day : Number(dd),
             month : Number(mm),
             year : Number(yyyy)
-
-        
         };
         flagOfMain = true;
-        var checkedDateList = checkPalindromeForAllDateFormats(date)
+        var checkedDateList = checkPalindromeForAllDateFormats(date);
         for(let i=0;i<checkedDateList.length;i++){
             if(checkedDateList[i]){
+                ShowP();
                 resultDiv.innerText = "Yay, Your Birthday is a Palindrome";
                 flagOfMain = false;
                 break;
@@ -180,11 +180,17 @@ function showResult() {
         var [counterOfDaysPrev,prevDate] = getPrevDateAsPalindrome(date);
         if(counterOfDaysPrev < counterOfDays){
             var dayOrDays = (Number(counterOfDaysPrev) === 1) ? "day":"days";
+            ShowP();
             resultDiv.innerText = `The nearest palindrome date is ${prevDate.day}-${prevDate.month}-${prevDate.year}, you missed by ${counterOfDaysPrev} ${dayOrDays}.`;}
-        }
+        // }
         else{
         var dayOrDays = (Number(counterOfDays) === 1) ? "day":"days";
+        ShowP();
         resultDiv.innerText = `The nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${counterOfDays} ${dayOrDays}.`;}
+    }}
+    else{
+        ShowP();
+        resultDiv.innerText = "Please Enter your Birthday!!"
     }
 }
 
@@ -196,6 +202,7 @@ function getPrevDate(date){
 
     if (day === 0) {
         month--;
+        day = daysInMonth[month - 1];
     
         if (month === 0) {
           month = 12;
@@ -224,7 +231,7 @@ function getPrevDate(date){
 
 function getPrevDateAsPalindrome(date){
     var prevDate = getPrevDate(date);
-        counterOfDays = 0;
+    var counterOfDays = 0;
 
         while(1){
             counterOfDays++;
@@ -238,4 +245,18 @@ function getPrevDateAsPalindrome(date){
             }
             prevDate = getPrevDate(prevDate);
         }
+}
+
+
+function loadingHider(){
+    hideP();
+    loadingBar.style.display="block";
+    setTimeout(function(){ loadingBar.style.display="none"; showResult(); }, 3000);
+}
+
+function hideP(){
+    resultDiv.style.display = "none";
+}
+function ShowP(){
+    resultDiv.style.display = "block";
 }
