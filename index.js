@@ -1,3 +1,7 @@
+var bdayInput = document.querySelector("#bday-input");
+var showBtn = document.querySelector("#show-btn");
+var resultDiv = document.querySelector("result");
+
 function reverseString(checkString){
 var str = checkString;
 
@@ -140,7 +144,7 @@ function getNextDate(date){
                 if(resultList[i]){
                     console.log([counterOfDays, nextDate]);
                     return [counterOfDays, nextDate];
-                    break;
+                    
 
                 }
             }
@@ -148,4 +152,13 @@ function getNextDate(date){
         }
     }
     
-getNextDateAsPalindrome(date);
+// getNextDateAsPalindrome(date);
+
+showBtn.addEventListener("click",showResult);
+
+function showResult() {
+    var inputByButton = bdayInput.value;
+    if(inputByButton !== ''){
+        console.log(inputByButton);
+    }
+}
