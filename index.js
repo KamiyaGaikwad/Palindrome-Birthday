@@ -179,10 +179,12 @@ function showResult() {
         var [counterOfDays,nextDate] = getNextDateAsPalindrome(date);
         var [counterOfDaysPrev,prevDate] = getPrevDateAsPalindrome(date);
         if(counterOfDaysPrev < counterOfDays){
-            resultDiv.innerText = `The nearest palindrome date is ${prevDate.day}-${prevDate.month}-${prevDate.year}, you missed by ${counterOfDaysPrev} days.`;}
+            var dayOrDays = (Number(counterOfDaysPrev) === 1) ? "day":"days";
+            resultDiv.innerText = `The nearest palindrome date is ${prevDate.day}-${prevDate.month}-${prevDate.year}, you missed by ${counterOfDaysPrev} ${dayOrDays}.`;}
         }
         else{
-        resultDiv.innerText = `The nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${counterOfDays} days.`;}
+        var dayOrDays = (Number(counterOfDays) === 1) ? "day":"days";
+        resultDiv.innerText = `The nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${counterOfDays} ${dayOrDays}.`;}
     }
 }
 
