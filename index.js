@@ -1,6 +1,6 @@
 var bdayInput = document.querySelector("#bday-input");
 var showBtn = document.querySelector("#show-btn");
-var resultDiv = document.querySelector("result");
+var resultDiv = document.querySelector("#result");
 
 function reverseString(checkString){
 var str = checkString;
@@ -25,10 +25,6 @@ else{
 }
 }
 
-var date  = { 
-    day : 5, 
-    month : 1, 
-    year : 2020 }
 
 function dateFromNumberToString(date){
     var dateInStr = {day:"", month:"", year:""}
@@ -142,7 +138,6 @@ function getNextDate(date){
             var resultList = checkPalindromeForAllDateFormats(nextDate);
             for(var i=0;i<resultList.length;i++){
                 if(resultList[i]){
-                    console.log([counterOfDays, nextDate]);
                     return [counterOfDays, nextDate];
                     
 
@@ -152,13 +147,36 @@ function getNextDate(date){
         }
     }
     
-// getNextDateAsPalindrome(date);
+
 
 showBtn.addEventListener("click",showResult);
 
 function showResult() {
     var inputByButton = bdayInput.value;
     if(inputByButton !== ''){
-        console.log(inputByButton);
+        var date = inputByButton.split("-");
+        var yyyy = date[0];
+        var mm = date[1];
+        var dd = date[2];
+
+        var date = {
+            day : Number(dd),
+            month : Number(mm),
+            year : Number(yyyy)
+
+        
+        };
+        flagOfMain = true;
+        var checkedDateList = checkPalindromeForAllDateFormats(date)
+        for(let i=0;i<checkedDateList.length;i++){
+            if(checkedDateList[i]){
+                resultDiv.innerText = "Yay, Your Birthday is a Palindrome";
+                flagOfMain = false;
+                break;
+            }
+        }
+        if(flagOfMain == true){
+        var [counterOfDays,nextDate] = getNextDateAsPalindrome(date);
+        resultDiv.innerText = `The nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${counterOfDays} days.`;}
     }
 }
