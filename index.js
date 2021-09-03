@@ -177,6 +177,63 @@ function showResult() {
         }
         if(flagOfMain == true){
         var [counterOfDays,nextDate] = getNextDateAsPalindrome(date);
+        var [counterOfDaysPrev,prevDate] = getPrevDateAsPalindrome(date);
+        if(counterOfDaysPrev < counterOfDays){
+            resultDiv.innerText = `The nearest palindrome date is ${prevDate.day}-${prevDate.month}-${prevDate.year}, you missed by ${counterOfDaysPrev} days.`;}
+        }
+        else{
         resultDiv.innerText = `The nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${counterOfDays} days.`;}
     }
+}
+
+function getPrevDate(date){
+    var day = date.day - 1;
+    var month = date.month;
+    var year = date.year;
+    var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    if (day === 0) {
+        month--;
+    
+        if (month === 0) {
+          month = 12;
+          day = 31;
+          year--;
+        }
+        else if (month === 2) {
+          if (isLeapYear(year)) {
+            day = 29;
+          }
+          else {
+            day = 28;
+          }
+        }
+        else {
+          day = daysInMonth[month - 1];
+        }
+      }
+    
+    return {
+        day: day,
+        month: month,
+        year: year
+      }
+    }
+
+function getPrevDateAsPalindrome(date){
+    var prevDate = getPrevDate(date);
+        counterOfDays = 0;
+
+        while(1){
+            counterOfDays++;
+            var resultList = checkPalindromeForAllDateFormats(prevDate);
+            for(var i=0;i<resultList.length;i++){
+                if(resultList[i]){
+                    return [counterOfDays, prevDate];
+                    
+
+                }
+            }
+            prevDate = getPrevDate(prevDate);
+        }
 }
