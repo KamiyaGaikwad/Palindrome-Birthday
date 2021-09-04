@@ -2,6 +2,9 @@ var bdayInput = document.querySelector("#bday-input");
 var showBtn = document.querySelector("#show-btn");
 var resultDiv = document.querySelector("#result");
 var loadingBar = document.querySelector("#loading-bar");
+var howBtn = document.querySelector("#how-btn");
+var howDiv = document.querySelector("#how-div");
+
 
 function reverseString(checkString){
 var str = checkString;
@@ -167,10 +170,13 @@ function showResult(){
         };
         flagOfMain = true;
         var checkedDateList = checkPalindromeForAllDateFormats(date);
+        // console.log(dateformatprint);
         for(let i=0;i<checkedDateList.length;i++){
             if(checkedDateList[i]){
+                var [dateformatprint,datePrint] = how1(checkedDateList,date);
                 ShowP();
                 resultDiv.innerText = "Yay, Your Birthday is a Palindrome";
+                howDiv.innerText = `When your birthday was put in ${dateformatprint} sequence, it became a palindrome - ${datePrint}.`
                 flagOfMain = false;
                 break;
             }
@@ -179,14 +185,18 @@ function showResult(){
         var [counterOfDays,nextDate] = getNextDateAsPalindrome(date);
         var [counterOfDaysPrev,prevDate] = getPrevDateAsPalindrome(date);
         if(counterOfDaysPrev < counterOfDays){
+            var [dateformatprint,datePrint] = nextprevhow(prevDate);
             var dayOrDays = (Number(counterOfDaysPrev) === 1) ? "day":"days";
             ShowP();
-            resultDiv.innerText = `The nearest palindrome date is ${prevDate.day}-${prevDate.month}-${prevDate.year}, you missed by ${counterOfDaysPrev} ${dayOrDays}.`;}
+            resultDiv.innerText = `The nearest palindrome date is ${prevDate.day}-${prevDate.month}-${prevDate.year}, you missed by ${counterOfDaysPrev} ${dayOrDays}.`;
+            howDiv.innerText = `When the above date was put in ${dateformatprint} sequence, it became a palindrome - ${datePrint}.`}
         // }
         else{
+        var [dateformatprint,datePrint] = nextprevhow(nextDate);
         var dayOrDays = (Number(counterOfDays) === 1) ? "day":"days";
         ShowP();
-        resultDiv.innerText = `The nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${counterOfDays} ${dayOrDays}.`;}
+        resultDiv.innerText = `The nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${counterOfDays} ${dayOrDays}.`;
+        howDiv.innerText = `When the above date was put in ${dateformatprint} sequence, it became a palindrome - ${datePrint}.`}
     }}
     else{
         ShowP();
@@ -256,7 +266,50 @@ function loadingHider(){
 
 function hideP(){
     resultDiv.style.display = "none";
+    howBtn.style.display = "none";
+    howDiv.style.display = "none";
 }
 function ShowP(){
     resultDiv.style.display = "block";
+    howBtn.style.display="block"; 
+}
+
+var flag=1;
+function ShowDiv(){
+    if(flag == 1){
+        howDiv.style.display="block";
+        flag=0;
+    }
+    else{
+        howDiv.style.display="none";
+        flag=1;
+    }
+    
+}
+
+howBtn.addEventListener("click",ShowDiv);
+
+
+function how1(checkedList,date){
+    var formatList = ['DDMMYYYY', 'MMDDYYYY', 'YYYYMMDD', 'DDMMYY', 'MMDDYY', 'YYMMDD'];
+    var checkedList = checkedList;
+    var dateListed = datesInAllFormats(date);
+
+    for(i=0;i<formatList.length;i++){
+        if(checkedList[i] == true){
+            return [formatList[i],dateListed[i]];
+            
+        }
+    }
+}
+
+function nextprevhow(date){
+    var nextprevList = checkPalindromeForAllDateFormats(date);
+    var formatList = ['DDMMYYYY', 'MMDDYYYY', 'YYYYMMDD', 'DDMMYY', 'MMDDYY', 'YYMMDD'];
+    var dateListed = datesInAllFormats(date);
+    for(i=0;i<formatList.length;i++){
+        if(nextprevList[i] == true){
+            return [formatList[i],dateListed[i]];
+        }
+    }
 }
